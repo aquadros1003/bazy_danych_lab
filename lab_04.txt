@@ -1,0 +1,21 @@
+Zadanie 1.
+select * from postac where rodzaj='wiking' and nazwa!='Bjorn' order by data_ur;
+delete from postac where id_postaci='4';
+delete from postac where id_postaci='6';
+alter table postac modify id_postaci int auto_increment;
+alter table walizka drop foreign key walizka_ibfk_1;
+alter table przetwory drop foreign key przetwory_ibfk_2;
+alter table przetwory drop foreign key przetwory_ibfk_1;
+alter table postac modify id_postaci int;
+alter table postac drop primary key;
+Zadanie 2.
+alter table postac add pesel varchar(11)not null primary key first;
+update postac set pesel='456827938246'+id_postaci;
+alter table postac modify rodzaj enum('wiking','ptak','kobieta','syrena');
+insert into postac(pesel,id_postaci,nazwa,rodzaj,data_ur,wiek) values('31363295366','4','Gertruda Nieszczera','syrena','1953-02-16','51');
+Zadanie 3.
+update postac set statek='Bazy_Danych' where nazwa like '%a%';
+update statek set max_ladownosc=0.7*max_ladownosc where data_wodowania between '1900-12-31' and '2001-01-01';
+
+
+
