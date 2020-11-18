@@ -16,6 +16,20 @@ insert into postac(pesel,id_postaci,nazwa,rodzaj,data_ur,wiek) values('313632953
 Zadanie 3.
 update postac set statek='Bazy_Danych' where nazwa like '%a%';
 update statek set max_ladownosc=0.7*max_ladownosc where data_wodowania between '1900-12-31' and '2001-01-01';
+alter table postac add check(wiek<1001);
+Zadanie 4.
+alter table postac mofify  'rodzaj' enum('syrena','wiking,'kobieta','ptak','waz');
+insert into postac values('15834895546','6','Loko','waz','1742-06-19','64',default,default);
+create table Marynarz select * from postac;
+alter table Marynarz add primary key(pesel);
+Zadanie 5.
+update
+delete from ... where .. update postac set statek=default;
+delete from ...  delete from postac where id_postaci='7';
+drop table ...   drop table statek;
+create table zwierz (...)   create table zwierz (id_zwierza int auto_increment, nazwa varchar(40), wiek int, primary key(id_zwierza));
+insert into zwierz select ...   insert into zwierz values(id_zwierza,nazwa,wiek) select id_postaci,nazwa,wiek from postac where  rodzaj='waz' and rodzaj='ptak';
+
 
 
 
