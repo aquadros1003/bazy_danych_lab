@@ -2,6 +2,7 @@ Zadanie 1.
 1.select avg(waga) from kreatura where rodzaj='wiking';
 2.select rodzaj, avg(waga) as srednia_waga from kreatura group by rodzaj;
 3.select rodzaj,round(avg(year(current_timestamp)-year(dataUr))) as 'sredni wiek' from kreatura group by rodzaj ;
+
 Zadanie 2.
 1.select rodzaj, sum(waga) as suma from zasob group by rodzaj;
 2.select nazwa, avg(waga) as 'srednia_waga' from zasob where ilosc>=4 group by nazwa having
