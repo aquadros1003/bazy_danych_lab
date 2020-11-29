@@ -1,5 +1,5 @@
 Zadanie 1.
-1.select avg(waga) from kreatura where rodzaj='wiking';
+1.SELECT AVG(waga) FROM kreatura WHERE rodzaj='wiking';
 2.select rodzaj, avg(waga) as srednia_waga from kreatura group by rodzaj;
 3.select rodzaj,round(avg(year(current_timestamp)-year(dataUr))) as 'sredni wiek' from kreatura group by rodzaj ;
 
@@ -9,3 +9,25 @@ Zadanie 2.
 srednia_waga>10;
 select nazwa, avg(waga) from zasob group by nazwa having avg(waga)>10 and sum(ilosc)>=4;
 3.select rodzaj,count(distinct nazwa) from zasob where ilosc>1 group by rodzaj;
+
+Zadanie 3.
+1.SELECT k.nazwa, sum(e.ilosc)
+FROM kreatura k, ekwipunek e
+WHERE k.idKreatury=e.idKreatury
+GROUP BY k.idKreatury;
+2.SELECT k.nazwa, e.idZasobu, e.ilosc
+FROM kreatura k, ekwipunek e
+WHERE k.idKreatury=e.idKreatury;
+3.SELECT idKreatury FROM kreatura WHERE idKreatury
+NOT IN (SELECT idKreatury FROM ekwipunek
+WHERE idKreatury IS NOT NULL);
+
+Zadanie 4.
+1.select k.nazwa, k.idKreatury,z.nazwa from kreatura k natural join ekwipunek e inner join zasob z
+ON e.idZasobu=z.idZasobu WHERE k.dataUR BETWEEN '1670-01-01' AND '1680-12-31';
+2.select k.nazwa,k.dataUr from Kreatura as k natural join Ekwipunek e inner join Zasob z on e.idZasobu=z.idZasobu where z.rodzaj='jedzenie' order by k.dataUr ASC limit 5;
+3..select concat(k.nazwa,' - ',k2.nazwa) from kreatura as k, kreatura as k2 where k2.idKreatury=k.idkreatury+5;
+
+Zadanie 5.
+1.select k.rodzaj, avg(e.ilosc*z.waga) as ilosc from kreatura as k inner join ekwipunek e on k.idKreatury=e.idKreatury inner join zasob z on z.idZasobu=e.idZasobu where k.rodzaj!='malpa' and k.rodzaj!='waz' and e.ilosc<30 group by k.rodzaj ;
+2,select distinct(rodzaj) ,dataUr, min(dataUr), max(dataUr) from kreatura group by rodzaj,dataUr;
