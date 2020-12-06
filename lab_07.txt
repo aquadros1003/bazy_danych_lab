@@ -16,6 +16,7 @@ from sektor s left join etapy_wyprawy e on e.sektor=s.id_sektora group by id_sek
 Zadanie 4.
 1.SELECT w.nazwa,sum(length(et.dziennik)) from wyprawa w inner join etapy_wyprawy et on w.id_wyprawy=et.idEtapu 
 group by w.nazwa having sum(length(et.dziennik)) <400;
-2.SELECT w.nazwa, sum(z.waga*z.ilosc)/count(k.idKreatury) from zasob z inner join kreatura k, wyprawa w group by w.nazwa;
+2.select w.nazwa, sum(e.ilosc*z.waga)/count(distinct(u.id_uczestnika)) as średnia_waga from wyprawa as w, zasob as z, uczestnicy as u 
+inner join ekwipunek as e on u.id_uczestnika=e.idKreatury where u.id_wyprawy=w.id_wyprawy and z.idZasobu=e.idZasobu group by w.nazwa;
 
-
+Zadanie 5.
