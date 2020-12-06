@@ -8,10 +8,13 @@ Zadanie 2.
 FROM wyprawa AS w, uczestnicy AS u, kreatura AS k
 WHERE w.id_wyprawy=u.id_wyprawy AND u.id_uczestnika=k.idKreatury
 GROUP BY w.nazwa;
+2.SELECT et.idEtapu, s.nazwa, k.nazwa FROM etapy_wyprawy et, wyprawa w, sektor s, kreatura k WHERE et.idWyprawy = w.id_wyprawy
+AND et.sektor = s.id_sektora AND w.kierownik = k.idKreatury ORDER BY w.data_rozpoczecia, et.kolejnosc;
 
 Zadanie 3.
-2.select id_sektora,count(idEtapu) as odwiedzony 
+1.select id_sektora,count(idEtapu) as odwiedzony 
 from sektor s left join etapy_wyprawy e on e.sektor=s.id_sektora group by id_sektora ;
+2.select nazwa,if(count(id_uczestnika)>0,"bral udzial w wyprawie","nie bral udzialu w wyprawie") from kreatura left join uczestnicy on idKreatury=id_uczestnika group by nazwa ;
 
 Zadanie 4.
 1.SELECT w.nazwa,sum(length(et.dziennik)) from wyprawa w inner join etapy_wyprawy et on w.id_wyprawy=et.idEtapu 
