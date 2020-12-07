@@ -1,0 +1,21 @@
+Zadanie 1.
+DELIMITER //
+CREATE TRIGGER kreatura_before_insert
+BEFORE INSERT ON kreatura
+FOR EACH ROW
+BEGIN
+  IF NEW.waga < 0
+  THEN
+    SET NEW.waga = 0;
+  END IF;
+END
+//
+DELIMITER ;
+
+Zadanie 2.
+1,1.CREATE TABLE archiwum_wypraw 
+( id_wyprawy INT primary key, nazwa varchar(40), data_rozpoczecia date, data_zakonczenia date, kierownik varchar(40));
+CREATE TRIGGER uczestnicy_after_insert AFTER DELETE ON wyprawa 
+FOR EACH ROW BEGIN INSERT INTO archiwum_wypraw 
+SELECT w.id_wyprawy, w.nazwa, w.data_rozpoczecia, w.data_zakonczenia, k.nazwa from wyprawa w, kreatura k 
+WHERE w.kierownik=k.idKreatury AND w.id_wyprawy=OLD.id_wyprawy; END
