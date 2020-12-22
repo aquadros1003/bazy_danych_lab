@@ -104,9 +104,6 @@ CREATE TABLE IF NOT EXISTS `__projekt`.`magazyn` (
   `ilosc_felg` INT NULL DEFAULT NULL,
   `sruba` INT NULL DEFAULT NULL,
   `ilosc_srub` INT NULL DEFAULT NULL,
-  INDEX `1` (`opona` ASC) VISIBLE,
-  INDEX `2` (`felga` ASC) VISIBLE,
-  INDEX `3` (`sruba` ASC) VISIBLE,
   CONSTRAINT `1`
     FOREIGN KEY (`opona`)
     REFERENCES `__projekt`.`opony` (`id_opony`),
@@ -153,7 +150,6 @@ CREATE TABLE IF NOT EXISTS `__projekt`.`pracownicy` (
   `adres_zamieszkania` VARCHAR(40) NULL DEFAULT NULL,
   `telefon` VARCHAR(9) NULL DEFAULT NULL,
   PRIMARY KEY (`id_pracownika`),
-  INDEX `stanowisko` (`stanowisko` ASC) VISIBLE,
   CONSTRAINT `pracownicy_ibfk_1`
     FOREIGN KEY (`stanowisko`)
     REFERENCES `__projekt`.`stanowisko` (`id_stanowiska`))
@@ -187,10 +183,6 @@ CREATE TABLE IF NOT EXISTS `__projekt`.`zlecenia` (
   `data_zlecenia` DATE NULL DEFAULT NULL,
   `zuzyte_materialy` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id_zlecenia`),
-  INDEX `usluga` (`usluga` ASC) VISIBLE,
-  INDEX `klient` (`klient` ASC) VISIBLE,
-  INDEX `stanowisko` (`stanowisko` ASC) VISIBLE,
-  INDEX `zlecenia_ibfk_3_idx` (`zuzyte_materialy` ASC) VISIBLE,
   CONSTRAINT `zlecenia_ibfk_1`
     FOREIGN KEY (`usluga`)
     REFERENCES `__projekt`.`uslugi` (`id_uslugi`),
@@ -243,12 +235,12 @@ BEGIN
 CASE indeks_predkosci
     WHEN "L" THEN SELECT indeks_predkosci AS "limit_predkosci = 120";
     WHEN "M" THEN select indeks_predkosci AS "limit_predkosci = 130";
-	WHEN "N" then select indeks_predkosci AS "limit_predkosci = 140";
-	WHEN "P" THEN SElect indeks_predkosci AS "limit_predkosci = 150";
-	WHEN "Q" THEN Select indeks_predkosci AS "limit_predkosci = 160";
-	WHEN "R" THEN SElect indeks_predkosci AS "limit_predkosci = 170";
-	WHEN "S" THEN SElect indeks_predkosci AS "limit_predkosci = 180";
-	WHEN "T" THEN SElect indeks_predkosci AS "limit_predkosci = 190";
+    WHEN "N" then select indeks_predkosci AS "limit_predkosci = 140";
+    WHEN "P" THEN SElect indeks_predkosci AS "limit_predkosci = 150";
+    WHEN "Q" THEN Select indeks_predkosci AS "limit_predkosci = 160";
+    WHEN "R" THEN SElect indeks_predkosci AS "limit_predkosci = 170";
+    WHEN "S" THEN SElect indeks_predkosci AS "limit_predkosci = 180";
+    WHEN "T" THEN SElect indeks_predkosci AS "limit_predkosci = 190";
     WHEN "U" THEN SElect indeks_predkosci AS "limit_predkosci = 200";
     WHEN "V" THEN SElect indeks_predkosci AS  "limit_predkosci = 240";
 ELSE select indeks_predkosci AS "TO NIE JEST INDEKS PREDKOSCI";
@@ -278,7 +270,7 @@ DEFINER=`jankowskil`@`localhost`
 TRIGGER `jankowskil`.`zwolnienia`
 AFTER DELETE ON `jankowskil`.`pracownicy`
 FOR EACH ROW
-SET @zwolnieni_pracownicy = @zwolnieni_pracownicy -1$$
+SET @zwolnieni_pracownicy = @zwolnieni_pracownicy + 1$$
 
 USE `__projekt`$$
 CREATE
